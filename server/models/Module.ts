@@ -8,4 +8,7 @@ export interface Module {
     lessons: Lesson[];
     ending: Lesson;
     test: Test;
+    duration: number;
+    startDate: null | Date;
+    endDate: null | Date;
 }
