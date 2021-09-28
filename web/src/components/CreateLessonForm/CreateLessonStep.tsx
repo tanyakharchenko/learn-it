@@ -1,44 +1,100 @@
-import React from 'react';
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { StepType } from "types/course";
 import { setLessonStep } from "store/newCourse/slice";
-import { useAppDispatch } from "store/hooks";
+import { newCourseCurrentLessonSteps } from "store/newCourse/selectors";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { LessonNewStep } from "./LessonNewStep";
+import { CreatedStep } from "./components/CreatedStep";
 
 interface OwnProps {
-    temporaryLessonId: string;
-    temporaryModuleId: string;
+  temporaryLessonId: string;
+  temporaryModuleId: string;
 }
 
-export const CreateLessonStep: React.FC<OwnProps> = ({temporaryLessonId, temporaryModuleId}) => {
+const stepTypes = [StepType.Video, StepType.Notes, StepType.Homework];
+
+export const CreateLessonStep: React.FC<OwnProps> = ({
+  temporaryLessonId,
+  temporaryModuleId,
+}) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [isCreationDisabled, setIsCreationDisabled] = React.useState(false);
+
+  const onEditStart = () => {
+    setIsCreationDisabled(true);
+  };
+
+  const onEditEnd = () => {
+    setIsCreationDisabled(false);
+  };
+
+  const lessonSteps = useAppSelector((state) =>
+    newCourseCurrentLessonSteps(state, {
+      currentLessonId: temporaryLessonId,
+      currentModuleId: temporaryModuleId,
+    })
+  );
 
   const saveStep = ({
     title,
     description,
     file,
     temporaryStepId,
+    stepType,
   }: {
     title: string;
     description: string;
     file: File | null;
     temporaryStepId: string;
+    stepType: StepType;
   }) => {
-    dispatch(setLessonStep({
-     title,
-     description,
-     file,
-     temporaryModuleId,
-     temporaryLessonId,
-     temporaryStepId 
-    }))
+    dispatch(
+      setLessonStep({
+        title,
+        description,
+        file,
+        temporaryModuleId,
+        temporaryLessonId,
+        temporaryStepId,
+        stepType,
+      })
+    );
+  };
+
+  const mapTranslationToStep = {
+    [StepType.Video]: t("general.video"),
+    [StepType.Notes]: t("general.notes"),
+    [StepType.Homework]: t("general.homework"),
   };
 
   return (
     <>
-      <LessonNewStep saveStep={saveStep} text={t("general.video")} />
-      <LessonNewStep saveStep={saveStep} text={t("general.notes")} />
-      <LessonNewStep saveStep={saveStep} text={t("general.homework")} />
+      {stepTypes.map((stepType) => {
+        const createdCurrentStepType = lessonSteps?.filter(
+          (step) => step.stepType === stepType
+        );
+        return (
+          <React.Fragment key={stepType}>
+            <LessonNewStep
+              key={stepType}
+              saveStep={saveStep}
+              text={mapTranslationToStep[stepType]}
+              stepType={stepType}
+              isCreationDisabled={isCreationDisabled}
+            />
+            {createdCurrentStepType?.map((step) => (
+              <CreatedStep
+                step={step}
+                key={step.temporaryStepId}
+                onEditStart={onEditStart}
+                onEditEnd={onEditEnd}
+              />
+            ))}
+          </React.Fragment>
+        );
+      })}
     </>
   );
 };

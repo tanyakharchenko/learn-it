@@ -1,6 +1,7 @@
 interface LessonStep {
   title: string;
   description: string;
+  stepType: StepType;
 }
 
 interface Lesson {
@@ -35,4 +36,10 @@ interface NewModule extends Module {
 
 export interface NewCourse extends Course {
   modules: NewModule[];
+}
+
+export enum StepType {
+  Video, 
+  Notes,
+  Homework
 }

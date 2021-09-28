@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NewCourse, NewLessonStep } from "../../types/course";
+import { NewCourse, NewLessonStep, StepType } from "../../types/course";
 
 interface CourseState extends NewCourse {}
 
@@ -24,7 +24,19 @@ export const newCourseSlice = createSlice({
               if (lesson.temporaryLessonId === temporaryLessonId) {
                 return {
                   ...lesson,
-                  steps: lesson.steps ? [...lesson.steps, step] : [step],
+                  steps: lesson.steps
+                    ? lesson.steps.map((currentStep) => {
+                        if (
+                          currentStep.temporaryStepId === step.temporaryStepId
+                        ) {
+                          return {
+                            ...step,
+                          };
+                        }
+
+                        return currentStep;
+                      })
+                    : [step],
                 };
               }
               return lesson;
@@ -59,18 +71,25 @@ export const newCourseSlice = createSlice({
         if (module.temporaryModuleId === action.payload.temporaryModuleId) {
           return {
             ...module,
-            lessons: module.lessons ? module.lessons.map((lesson) => {
-              if (lesson.temporaryLessonId === action.payload.temporaryLessonId) {
-                return lesson;
-              }
+            lessons: module.lessons
+              ? module.lessons.map((lesson) => {
+                  if (
+                    lesson.temporaryLessonId ===
+                    action.payload.temporaryLessonId
+                  ) {
+                    return lesson;
+                  }
 
-              return {
-                temporaryLessonId: action.payload.temporaryLessonId
-              }
-            }) : [{
-              temporaryLessonId: action.payload.temporaryLessonId
-            }]
-          }
+                  return {
+                    temporaryLessonId: action.payload.temporaryLessonId,
+                  };
+                })
+              : [
+                  {
+                    temporaryLessonId: action.payload.temporaryLessonId,
+                  },
+                ],
+          };
         }
 
         return module;
@@ -79,7 +98,11 @@ export const newCourseSlice = createSlice({
   },
 });
 
-export const { setLessonStep, setModuleTemporaryId, setLessonTemporaryId } = newCourseSlice.actions;
+export const {
+  setLessonStep,
+  setModuleTemporaryId,
+  setLessonTemporaryId,
+} = newCourseSlice.actions;
 
 interface NewLessonStepPayload extends NewLessonStep {
   temporaryModuleId: string;

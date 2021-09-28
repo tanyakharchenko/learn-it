@@ -1,26 +1,36 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { StepType } from "types/course";
 import { v4 as uuidv4 } from "uuid";
-import TextField from "components/ui/TextField";
 import DoneIcon from "components/icons/Done";
+import { LessonStepFields } from "./LessonStepFields";
 import * as Styled from "./CreateLessonForm.styled";
 
 interface OwnProps {
   text: string;
+  stepType: StepType;
+  isCreationDisabled: boolean;
   saveStep: ({
     title,
     description,
     file,
     temporaryStepId,
+    stepType,
   }: {
     title: string;
     description: string;
     file: File | null;
     temporaryStepId: string;
+    stepType: StepType;
   }) => void;
 }
 
-export const LessonNewStep: React.FC<OwnProps> = ({ text, saveStep }) => {
+export const LessonNewStep: React.FC<OwnProps> = ({
+  text,
+  saveStep,
+  stepType,
+  isCreationDisabled,
+}) => {
   const { t } = useTranslation();
   const [areInputsOpen, setAreInputsOpen] = React.useState(false);
   const [stepInfo, setStepInfo] = React.useState({
@@ -35,6 +45,10 @@ export const LessonNewStep: React.FC<OwnProps> = ({ text, saveStep }) => {
   };
 
   const closeInputs = () => {
+    setStepInfo({
+      title: "",
+      description: "",
+    });
     setAreInputsOpen(false);
   };
 
@@ -47,8 +61,20 @@ export const LessonNewStep: React.FC<OwnProps> = ({ text, saveStep }) => {
       description: stepInfo.description,
       file,
       temporaryStepId: uuidv4(),
+      stepType,
     });
+    closeInputs();
   };
+
+  const isSaveAvailable = stepInfo.title;
+
+  if (isCreationDisabled) {
+    return (
+      <Styled.TextButtonBlock>
+        <Styled.StepText>{text}</Styled.StepText>
+      </Styled.TextButtonBlock>
+    );
+  }
 
   return (
     <>
@@ -59,7 +85,11 @@ export const LessonNewStep: React.FC<OwnProps> = ({ text, saveStep }) => {
             <Styled.StepCloseOpenButton onClick={closeInputs}>
               -
             </Styled.StepCloseOpenButton>
-            <Styled.DoneStepButton onClick={onStepSave} variant="contained">
+            <Styled.DoneStepButton
+              onClick={onStepSave}
+              variant="contained"
+              disabled={!isSaveAvailable}
+            >
               <DoneIcon />
             </Styled.DoneStepButton>
           </>
@@ -71,32 +101,16 @@ export const LessonNewStep: React.FC<OwnProps> = ({ text, saveStep }) => {
       </Styled.TextButtonBlock>
       {areInputsOpen && (
         <Styled.StepInputsWrapper>
-          <TextField
-            label={t("lessonStep.title")}
-            fullWidth
-            margin="dense"
-            size="small"
-            value={stepInfo.title}
-            onChange={(event) => {
-              setStepInfo({ ...stepInfo, title: event.target.value });
-            }}
-          />
-          <TextField
-            label={t("lessonStep.description")}
-            fullWidth
-            margin="dense"
-            size="small"
-            value={stepInfo.description}
-            onChange={(event) => {
-              setStepInfo({ ...stepInfo, description: event.target.value });
-            }}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            size="small"
-            type="file"
-            inputRef={fileRef}
+          <LessonStepFields
+            titleValue={stepInfo.title}
+            titleOnChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setStepInfo({ ...stepInfo, title: event.target.value })
+            }
+            descriptionValue={stepInfo.description}
+            descriptionOnChange={(event) =>
+              setStepInfo({ ...stepInfo, description: event.target.value })
+            }
+            fileRef={fileRef}
           />
           <Styled.StepText variant="body2">
             {t("lessonStep.changeItLater")}

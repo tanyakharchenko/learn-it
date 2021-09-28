@@ -2,8 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import { setLessonTemporaryId } from "store/newCourse/slice";
-import { newCourseCurrentLessonSteps } from "store/newCourse/selectors";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppDispatch } from "store/hooks";
 import TextField from "components/ui/TextField";
 import { CreateLessonStep } from "./CreateLessonStep";
 import * as Styled from "./CreateLessonForm.styled";
@@ -17,15 +16,6 @@ export const CreateLessonForm: React.FC<OwnProps> = ({ temporaryModuleId }) => {
   const dispatch = useAppDispatch();
 
   const [temporaryLessonId, setTemporaryLessonId] = React.useState("");
-
-  const currentLessonSteps = useAppSelector((state) =>
-    newCourseCurrentLessonSteps(state, {
-      currentModuleId: temporaryModuleId,
-      currentLessonId: temporaryLessonId,
-    })
-  );
-
-  console.log(currentLessonSteps);
 
   React.useEffect(() => {
     const temporaryId = uuidv4();
