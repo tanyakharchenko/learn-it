@@ -1,9 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import TextField from "components/ui/TextField";
-import IconButton from "components/ui/IconButton";
-import CloseIcon from "components/icons/Close";
-import * as Styled from "./CreateLessonForm.styled";
+import UploadedFile from "components/ui/UploadedFile";
+import * as Styled from "./StepFields.styled";
 
 interface OwnProps {
   titleValue: string;
@@ -18,7 +17,7 @@ interface OwnProps {
   removeUploadedFile?: () => void;
 }
 
-export const LessonStepFields: React.FC<OwnProps> = ({
+export const StepFields: React.FC<OwnProps> = ({
   titleValue,
   titleOnChange,
   descriptionValue,
@@ -55,14 +54,7 @@ export const LessonStepFields: React.FC<OwnProps> = ({
       />
       {fileUploaded && (
         <>
-          <div style={{display: "flex"}}>
-            <Styled.UploadedFileText ellipsis>
-              {fileUploaded.name}
-            </Styled.UploadedFileText>
-            <IconButton onClick={removeUploadedFile}>
-              <CloseIcon color="error" fontSize="small" />
-            </IconButton>
-          </div>
+          <UploadedFile fileName={fileUploaded.name} onRemove={removeUploadedFile} />
           <Styled.UploadedFileText>
             {t("lessonStep.changeUploadedFile")}
           </Styled.UploadedFileText>

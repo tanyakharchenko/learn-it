@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StepType } from "types/course";
-import { setLessonStep } from "store/newCourse/slice";
+import { setLessonStep, editLessonStep } from "store/newCourse/slice";
 import { newCourseCurrentLessonSteps } from "store/newCourse/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { LessonNewStep } from "./LessonNewStep";
+import { NewStep } from "./components/NewStep";
 import { CreatedStep } from "./components/CreatedStep";
 
 interface OwnProps {
@@ -63,6 +63,32 @@ export const CreateLessonStep: React.FC<OwnProps> = ({
     );
   };
 
+  const saveEditedStep = ({
+    title,
+    description,
+    file,
+    temporaryStepId,
+    stepType,
+  }: {
+    title: string;
+    description: string;
+    file: File | null;
+    temporaryStepId: string;
+    stepType: StepType;
+  }) => {
+    dispatch(
+      editLessonStep({
+        title,
+        description,
+        file,
+        temporaryModuleId,
+        temporaryLessonId,
+        temporaryStepId,
+        stepType,
+      })
+    );
+  };
+
   const mapTranslationToStep = {
     [StepType.Video]: t("general.video"),
     [StepType.Notes]: t("general.notes"),
@@ -77,7 +103,7 @@ export const CreateLessonStep: React.FC<OwnProps> = ({
         );
         return (
           <React.Fragment key={stepType}>
-            <LessonNewStep
+            <NewStep
               key={stepType}
               saveStep={saveStep}
               text={mapTranslationToStep[stepType]}
@@ -90,6 +116,7 @@ export const CreateLessonStep: React.FC<OwnProps> = ({
                 key={step.temporaryStepId}
                 onEditStart={onEditStart}
                 onEditEnd={onEditEnd}
+                saveEditedStep={saveEditedStep}
               />
             ))}
           </React.Fragment>

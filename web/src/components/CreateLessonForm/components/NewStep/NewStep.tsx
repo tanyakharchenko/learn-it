@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StepType } from "types/course";
 import { v4 as uuidv4 } from "uuid";
+import { StepType } from "types/course";
 import DoneIcon from "components/icons/Done";
-import { LessonStepFields } from "./LessonStepFields";
-import * as Styled from "./CreateLessonForm.styled";
+import { StepFields } from "../StepFields";
+import * as Styled from "./NewStep.styled";
 
 interface OwnProps {
   text: string;
@@ -25,7 +25,7 @@ interface OwnProps {
   }) => void;
 }
 
-export const LessonNewStep: React.FC<OwnProps> = ({
+export const NewStep: React.FC<OwnProps> = ({
   text,
   saveStep,
   stepType,
@@ -101,7 +101,7 @@ export const LessonNewStep: React.FC<OwnProps> = ({
       </Styled.TextButtonBlock>
       {areInputsOpen && (
         <Styled.StepInputsWrapper>
-          <LessonStepFields
+          <StepFields
             titleValue={stepInfo.title}
             titleOnChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setStepInfo({ ...stepInfo, title: event.target.value })

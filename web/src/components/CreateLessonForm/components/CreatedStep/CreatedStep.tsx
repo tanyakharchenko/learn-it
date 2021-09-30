@@ -1,5 +1,5 @@
 import React from "react";
-import { NewLessonStep } from "types/course";
+import { NewLessonStep, StepType } from "types/course";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
 import CloseIcon from "components/icons/Close";
@@ -11,12 +11,26 @@ interface OwnProps {
   step: NewLessonStep;
   onEditStart: () => void;
   onEditEnd: () => void;
+  saveEditedStep: ({
+    title,
+    description,
+    file,
+    temporaryStepId,
+    stepType,
+  }: {
+    title: string;
+    description: string;
+    file: File | null;
+    temporaryStepId: string;
+    stepType: StepType;
+  }) => void;
 }
 
 export const CreatedStep: React.FC<OwnProps> = ({
   step,
   onEditStart,
   onEditEnd,
+  saveEditedStep
 }) => {
   const [isEditMode, setIsEditMode] = React.useState(false);
 
@@ -34,10 +48,9 @@ export const CreatedStep: React.FC<OwnProps> = ({
     <>
       {isEditMode ? (
         <EditStep
-          title={step.title}
-          description={step.description}
-          file={step.file}
+          step={step}
           closeEditMode={closeEditMode}
+          saveEditedStep={saveEditedStep}
         />
       ) : (
         <Styled.CreatedStep>
@@ -52,7 +65,7 @@ export const CreatedStep: React.FC<OwnProps> = ({
               <Pencil color="primary" fontSize="small" />
             </IconButton>
             <IconButton>
-              <CloseIcon color="error" fontSize="small" />
+              <CloseIcon color="secondary" fontSize="small" />
             </IconButton>
           </Styled.CreatedStepButtons>
         </Styled.CreatedStep>

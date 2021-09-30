@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Typography from "components/ui/Typography";
+import Button from "components/ui/Button";
 
 export const FormWrapper = styled.div`
     position: fixed;
@@ -13,8 +14,7 @@ export const FormWrapper = styled.div`
 
 
 export const Form = styled.div`
-    max-width: 20rem;
-    width: 100%;
+    width: 80%;
 `;
 
 export const Text = styled(Typography)`
@@ -25,4 +25,18 @@ export const TextButtonBlock = styled.div`
     display: flex;
     align-items: center;
     margin-top: 1rem;
+`;
+
+export const TestBlock = styled.div`
+    margin-top: 1rem;
+`;
+
+export const ActionButtons = styled.div`
+  display: flex;
+  justify-content: left;
+  margin-top: 1rem;
+`;
+
+export const ActionButton = styled(Button)`
+  margin-right: 1rem;
 `;

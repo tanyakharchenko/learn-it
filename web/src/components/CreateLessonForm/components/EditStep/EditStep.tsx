@@ -2,26 +2,37 @@ import React from "react";
 import IconButton from "components/ui/IconButton";
 import CloseIcon from "components/icons/Close";
 import DoneIcon from "components/icons/Done";
-import { LessonStepFields } from "components/CreateLessonForm/LessonStepFields";
+import { StepType, NewLessonStep } from "types/course";
+import { StepFields } from "../StepFields";
 import * as Styled from "./EditStep.styled";
 
 interface OwnProps {
-  title: string;
-  description: string;
-  file: File | null;
+  step: NewLessonStep;
   closeEditMode: () => void;
-}
-
-export const EditStep: React.FC<OwnProps> = ({
-  title,
-  description,
-  file,
-  closeEditMode,
-}) => {
-  const [newStepInfo, setNewStepInfo] = React.useState({
+  saveEditedStep: ({
     title,
     description,
     file,
+    temporaryStepId,
+    stepType,
+  }: {
+    title: string;
+    description: string;
+    file: File | null;
+    temporaryStepId: string;
+    stepType: StepType;
+  }) => void;
+}
+
+export const EditStep: React.FC<OwnProps> = ({
+  step,
+  closeEditMode,
+  saveEditedStep,
+}) => {
+  const [newStepInfo, setNewStepInfo] = React.useState({
+    title: step.title,
+    description: step.description,
+    file: step.file,
   });
 
   const fileRef = React.useRef(HTMLInputElement);
@@ -32,9 +43,9 @@ export const EditStep: React.FC<OwnProps> = ({
 
   const cancelEdit = () => {
     setNewStepInfo({
-      title,
-      description,
-      file,
+      title: step.title,
+      description: step.description,
+      file: step.file,
     });
     closeEditMode();
   };
@@ -42,7 +53,16 @@ export const EditStep: React.FC<OwnProps> = ({
   const saveChanges = () => {
     const fileRefCurrent = (fileRef.current as unknown) as HTMLInputElement;
     const file =
-      fileRefCurrent && fileRefCurrent.files ? fileRefCurrent.files[0] : null;
+      newStepInfo.file ||
+      (fileRefCurrent && fileRefCurrent.files ? fileRefCurrent.files[0] : null);
+
+    saveEditedStep({
+      title: newStepInfo.title,
+      description: newStepInfo.description,
+      file,
+      temporaryStepId: step.temporaryStepId,
+      stepType: step.stepType,
+    });
 
     closeEditMode();
   };
@@ -54,10 +74,10 @@ export const EditStep: React.FC<OwnProps> = ({
           <DoneIcon color="primary" fontSize="small" />
         </IconButton>
         <IconButton onClick={cancelEdit}>
-          <CloseIcon color="error" fontSize="small" />
+          <CloseIcon color="secondary" fontSize="small" />
         </IconButton>
       </Styled.EditStepButtons>
-      <LessonStepFields
+      <StepFields
         titleValue={newStepInfo.title}
         titleOnChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           setNewStepInfo({ ...newStepInfo, title: event.target.value })

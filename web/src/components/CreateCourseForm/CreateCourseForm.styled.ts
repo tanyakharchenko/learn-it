@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import Typography from "components/ui/Typography";
 
 export const Form = styled.form`
-    max-width: 20rem;
-    width: 100%;
+    width: 50%;
 `;
 
 export const Text = styled(Typography)`

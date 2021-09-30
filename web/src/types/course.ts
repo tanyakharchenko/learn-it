@@ -7,6 +7,7 @@ interface LessonStep {
 interface Lesson {
   title?: string;
   description?: string;
+  order?: string;
 }
 
 interface Module {
@@ -24,7 +25,7 @@ export interface NewLessonStep extends LessonStep {
   temporaryStepId: string;
 }
 
-interface NewLesson extends Lesson {
+export interface NewLesson extends Lesson {
   steps?: NewLessonStep[];
   temporaryLessonId?: string;
 }

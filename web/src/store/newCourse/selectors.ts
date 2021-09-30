@@ -42,3 +42,8 @@ export const newCourseCurrentLessonSteps = createSelector(
   newCourseCurrentLesson,
   (lesson) => lesson?.steps
 );
+
+export const newCourseCurrentModuleLessons = createSelector(
+  newCourseCurrentModule,
+  (module) => module?.lessons
+);
