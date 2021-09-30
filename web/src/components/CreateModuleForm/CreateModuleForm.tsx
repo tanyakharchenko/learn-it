@@ -3,7 +3,11 @@ import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { setModuleTemporaryId } from "store/newCourse/slice";
+import {
+  setModuleTemporaryId,
+  deleteModule,
+  setModuleInfo,
+} from "store/newCourse/slice";
 import { newCourseCurrentModuleLessons } from "store/newCourse/selectors";
 import TextField from "components/ui/TextField";
 import Container from "components/ui/Container";
@@ -18,16 +22,17 @@ import * as Styled from "./CreateModuleForm.styled";
 
 interface OwnProps {
   temporaryCourseId: string;
+  closeModuleForm: () => void;
 }
 
-export const CreateModuleForm: React.FC<OwnProps> = () => {
+export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const [temporaryModuleId, setTemporaryModuleId] = React.useState("");
   const [isCreateLessonOpen, setIsCreateLessonOpen] = React.useState(false);
-  const [moduleInfo, setModuleInfo] = React.useState({
+  const [currentModuleInfo, setCurrentModuleInfo] = React.useState({
     title: "",
     description: "",
     order: "1",
@@ -57,11 +62,35 @@ export const CreateModuleForm: React.FC<OwnProps> = () => {
 
   const removeUploadedFile = () => {
     setInputKey(Math.random().toString());
-    setModuleInfo({
-      ...moduleInfo,
+    setCurrentModuleInfo({
+      ...currentModuleInfo,
       file: null,
     });
   };
+
+  const onModuleFormCancel = () => {
+    dispatch(deleteModule({ temporaryModuleId }));
+    closeModuleForm();
+  };
+
+  const onModuleSave = () => {
+    const fileRefCurrent = (fileRef.current as unknown) as HTMLInputElement;
+    const file =
+      fileRefCurrent && fileRefCurrent.files ? fileRefCurrent.files[0] : null;
+
+    dispatch(
+      setModuleInfo({
+        title: currentModuleInfo.title,
+        description: currentModuleInfo.description,
+        order: currentModuleInfo.order,
+        temporaryModuleId,
+        file
+      })
+    );
+    closeModuleForm();
+  };
+
+  const isCreationDisabled = !currentModuleInfo.title;
 
   return (
     <Styled.FormWrapper>
@@ -72,8 +101,9 @@ export const CreateModuleForm: React.FC<OwnProps> = () => {
             label={t("moduleForm.title")}
             fullWidth
             margin="normal"
+            value={currentModuleInfo.title}
             onChange={(event) =>
-              setModuleInfo({ ...moduleInfo, title: event.target.value })
+              setCurrentModuleInfo({ ...currentModuleInfo, title: event.target.value })
             }
           />
           <TextField
@@ -81,8 +111,9 @@ export const CreateModuleForm: React.FC<OwnProps> = () => {
             label={t("moduleForm.description")}
             fullWidth
             margin="normal"
+            value={currentModuleInfo.description}
             onChange={(event) =>
-              setModuleInfo({ ...moduleInfo, description: event.target.value })
+              setCurrentModuleInfo({ ...currentModuleInfo, description: event.target.value })
             }
           />
           <TextField
@@ -90,13 +121,14 @@ export const CreateModuleForm: React.FC<OwnProps> = () => {
             type="number"
             margin="dense"
             variant="standard"
+            value={currentModuleInfo.order}
             inputProps={{ min: 1 }}
             onChange={(event) =>
-              setModuleInfo({ ...moduleInfo, order: event.target.value })
+              setCurrentModuleInfo({ ...currentModuleInfo, order: event.target.value })
             }
           />
           <Styled.TextButtonBlock>
-            <Styled.Text variant="body1">{t("moduleForm.lessons")}</Styled.Text>
+            <Styled.Text variant="body1">{t("general.lessons")}</Styled.Text>
             <IconButton onClick={openLessonForm} disabled={isCreateLessonOpen}>
               <PlusIcon sx={{ color: theme.colors.blue }} />
             </IconButton>
@@ -123,9 +155,9 @@ export const CreateModuleForm: React.FC<OwnProps> = () => {
               inputRef={fileRef}
               key={inputKey}
             />
-            {moduleInfo.file && (
+            {currentModuleInfo.file && (
               <UploadedFile
-                fileName={moduleInfo.file?.name}
+                fileName={currentModuleInfo.file?.name}
                 onRemove={removeUploadedFile}
               />
             )}
@@ -135,19 +167,19 @@ export const CreateModuleForm: React.FC<OwnProps> = () => {
           </Styled.TestBlock>
           <Styled.ActionButtons>
             <Styled.ActionButton
-              onClick={() => {}}
+              onClick={onModuleSave}
               variant="contained"
-              disabled={false}
+              disabled={isCreationDisabled}
             >
-              Сохранить
+              {t("general.save")}
               <DoneIcon />
             </Styled.ActionButton>
             <Styled.ActionButton
-              onClick={() => {}}
+              onClick={onModuleFormCancel}
               variant="contained"
               color="secondary"
             >
-              Отменить
+              {t("general.cancel")}
               <CloseIcon />
             </Styled.ActionButton>
           </Styled.ActionButtons>

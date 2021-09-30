@@ -6,7 +6,9 @@ import {
   setLessonTemporaryIdAction,
   editLessonStepAction,
   setLessonInfoAction,
-  deleteLessonAction
+  deleteLessonAction,
+  deleteModuleAction,
+  setModuleInfoAction
 } from "./actions";
 
 const initialState: CourseState = {
@@ -25,6 +27,8 @@ export const newCourseSlice = createSlice({
     editLessonStep: editLessonStepAction,
     setLessonInfo: setLessonInfoAction,
     deleteLesson: deleteLessonAction,
+    deleteModule: deleteModuleAction,
+    setModuleInfo: setModuleInfoAction
   },
 });
 
@@ -34,7 +38,9 @@ export const {
   setLessonTemporaryId,
   editLessonStep,
   setLessonInfo,
-  deleteLesson
+  deleteLesson,
+  deleteModule,
+  setModuleInfo
 } = newCourseSlice.actions;
 
 export default newCourseSlice.reducer;

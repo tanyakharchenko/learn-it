@@ -28,3 +28,15 @@ export interface DeleteLessonPayload {
   temporaryLessonId: string;
   temporaryModuleId: string;
 }
+
+export interface DeleteModulePayload {
+  temporaryModuleId: string;
+}
+
+export interface SetModuleInfo {
+  title: string;
+  description: string;
+  order: string;
+  temporaryModuleId: string;
+  file: File | null;
+}

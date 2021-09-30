@@ -13,6 +13,7 @@ interface Lesson {
 interface Module {
   title?: string;
   description?: string;
+  order?: string;
 }
 
 interface Course {
@@ -30,7 +31,7 @@ export interface NewLesson extends Lesson {
   temporaryLessonId?: string;
 }
 
-interface NewModule extends Module {
+export interface NewModule extends Module {
   lessons?: NewLesson[];
   temporaryModuleId?: string;
 }
@@ -43,4 +44,10 @@ export enum StepType {
   Video, 
   Notes,
   Homework
+}
+
+export enum Currency {
+  Uah = 'UAH',
+  Usd = 'USD',
+  Rub = 'RUB'
 }
