@@ -4,7 +4,7 @@ import Button from "components/ui/Button";
 
 export const FormWrapper = styled.div`
     position: fixed;
-    top: 0;
+    top: 3rem;
     right: 0;
     width: 50%; 
     height: 100vh;
@@ -14,7 +14,7 @@ export const FormWrapper = styled.div`
 
 
 export const Form = styled.div`
-    width: 80%;
+    width: 65%;
 `;
 
 export const Text = styled(Typography)`

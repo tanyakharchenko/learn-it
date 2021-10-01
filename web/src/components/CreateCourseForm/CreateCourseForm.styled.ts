@@ -3,7 +3,8 @@ import Typography from "components/ui/Typography";
 import Button from "components/ui/Button";
 
 export const Form = styled.form`
-    width: 50%;
+    width: 45%;
+    max-width: 40rem; 
 `;
 
 export const Text = styled(Typography)`
