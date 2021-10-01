@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import { newCourseModules } from "store/newCourse/selectors";
-import { deleteModule } from "store/newCourse/slice";
+import { deleteModule, saveCourseInfo } from "store/newCourse/slice";
 import { Currency } from "types/course";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
@@ -39,6 +39,13 @@ export const CreateCourseForm = () => {
 
   const [temporaryCourseId, setTemporaryCourseId] = React.useState("");
   const [isCreateModuleOpen, setIsCreateModuleOpen] = React.useState(false);
+  const [courseInfo, setCourseInfo] = React.useState({
+    title: "",
+    description: "",
+    price: "",
+    priceWithDiscount: "",
+    currency: Currency.Uah as Currency,
+  });
 
   const modules = useAppSelector(newCourseModules);
 
@@ -58,6 +65,16 @@ export const CreateCourseForm = () => {
     dispatch(deleteModule({ temporaryModuleId }));
   };
 
+  const saveCourse = () => {
+    console.log('qweqwe')
+    dispatch(
+      saveCourseInfo({
+        temporaryCourseId,
+        ...courseInfo,
+      })
+    );
+  };
+
   return (
     <Styled.Form>
       <Container>
@@ -66,6 +83,10 @@ export const CreateCourseForm = () => {
           label={t("courseForm.title")}
           fullWidth
           margin="normal"
+          onChange={(event) =>
+            setCourseInfo({ ...courseInfo, title: event.target.value })
+          }
+          value={courseInfo.title}
         />
         <TextField
           variant="standard"
@@ -73,6 +94,10 @@ export const CreateCourseForm = () => {
           multiline
           fullWidth
           margin="normal"
+          onChange={(event) =>
+            setCourseInfo({ ...courseInfo, description: event.target.value })
+          }
+          value={courseInfo.description}
         />
         <Styled.TextButtonBlock>
           <Styled.Text variant="body1">{t("courseForm.modules")}</Styled.Text>
@@ -87,7 +112,11 @@ export const CreateCourseForm = () => {
           />
         )}
         {modules.map((module) => (
-          <ModuleCard module={module} key={module.temporaryModuleId} onModuleDelete={onModuleDelete} />
+          <ModuleCard
+            module={module}
+            key={module.temporaryModuleId}
+            onModuleDelete={onModuleDelete}
+          />
         ))}
         <Styled.PriceBlock>
           <TextField
@@ -95,22 +124,35 @@ export const CreateCourseForm = () => {
             label={t("general.price")}
             multiline
             margin="normal"
+            onChange={(event) =>
+              setCourseInfo({ ...courseInfo, price: event.target.value })
+            }
+            value={courseInfo.price}
           />
           <TextField
             variant="standard"
             label={t("general.priceWithDiscount")}
             multiline
             margin="normal"
+            onChange={(event) =>
+              setCourseInfo({
+                ...courseInfo,
+                priceWithDiscount: event.target.value,
+              })
+            }
+            value={courseInfo.priceWithDiscount}
           />
           <Select
             label={t("general.currency")}
-            onChange={(value) => console.log(value)}
+            onChange={(value: Currency) =>
+              setCourseInfo({ ...courseInfo, currency: value })
+            }
             options={courseCurrency}
           />
         </Styled.PriceBlock>
         <Styled.ActionButtons>
           <Styled.ActionButton
-            onClick={() => {}}
+            onClick={saveCourse}
             variant="contained"
             disabled={false}
           >

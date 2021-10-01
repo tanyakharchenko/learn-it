@@ -19,6 +19,11 @@ interface Module {
 interface Course {
   title: string;
   description: string;
+  price: {
+    withDiscount: string;
+    withoutDiscount: string;
+    currency: Currency;
+  }
 }
 
 export interface NewLessonStep extends LessonStep {
@@ -38,6 +43,7 @@ export interface NewModule extends Module {
 
 export interface NewCourse extends Course {
   modules: NewModule[];
+  temporaryCourseId: string;
 }
 
 export enum StepType {

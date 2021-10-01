@@ -1,4 +1,4 @@
-import { NewCourse, NewLessonStep } from "../../types/course";
+import { Currency, NewCourse, NewLessonStep } from "../../types/course";
 
 export interface CourseState extends NewCourse {}
 
@@ -22,6 +22,15 @@ export interface SetLessonInfo {
   order: string;
   temporaryModuleId: string;
   temporaryLessonId: string;
+}
+
+export interface SaveCourseInfo {
+  temporaryCourseId: string;
+  title: string;
+  description: string;
+  price: string;
+  priceWithDiscount: string;
+  currency: Currency
 }
 
 export interface DeleteLessonPayload {

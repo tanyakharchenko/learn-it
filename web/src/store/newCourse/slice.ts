@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Currency } from "types/course";
 import { CourseState } from "./types";
 import {
   setLessonStepAction,
@@ -9,13 +10,20 @@ import {
   deleteLessonAction,
   deleteModuleAction,
   setModuleInfoAction,
-  deleteLessonStepAction
+  deleteLessonStepAction,
+  saveCourseInfoAction
 } from "./actions";
 
 const initialState: CourseState = {
   title: "",
   description: "",
   modules: [],
+  temporaryCourseId: "",
+  price: {
+    withoutDiscount: "",
+    withDiscount: "",
+    currency: Currency.Uah
+  }
 };
 
 export const newCourseSlice = createSlice({
@@ -31,6 +39,7 @@ export const newCourseSlice = createSlice({
     deleteModule: deleteModuleAction,
     setModuleInfo: setModuleInfoAction,
     deleteLessonStep: deleteLessonStepAction,
+    saveCourseInfo: saveCourseInfoAction
   },
 });
 
@@ -43,7 +52,8 @@ export const {
   deleteLesson,
   deleteModule,
   setModuleInfo,
-  deleteLessonStep
+  deleteLessonStep,
+  saveCourseInfo
 } = newCourseSlice.actions;
 
 export default newCourseSlice.reducer;
