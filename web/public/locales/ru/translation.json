@@ -35,5 +35,13 @@
     "price": "Цена",
     "priceWithDiscount": "Цена со скидкой",
     "currency": "Валюта"
+  },
+  "authentication": {
+    "login": "Войти",
+    "registration": "Создать аккаунт",
+    "email": "Email",
+    "password": "Пароль",
+    "loginHi": "С возвращением!",
+    "forgetPassword": "Забыли пароль?"
   }
 }
