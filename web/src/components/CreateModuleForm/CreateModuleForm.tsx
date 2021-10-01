@@ -7,6 +7,7 @@ import {
   setModuleTemporaryId,
   deleteModule,
   setModuleInfo,
+  deleteLesson,
 } from "store/newCourse/slice";
 import { newCourseCurrentModuleLessons } from "store/newCourse/selectors";
 import TextField from "components/ui/TextField";
@@ -84,10 +85,19 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
         description: currentModuleInfo.description,
         order: currentModuleInfo.order,
         temporaryModuleId,
-        file
+        file,
       })
     );
     closeModuleForm();
+  };
+
+  const onLessonDelete = (temporaryLessonId: string) => {
+    dispatch(
+      deleteLesson({
+        temporaryLessonId,
+        temporaryModuleId,
+      })
+    );
   };
 
   const isCreationDisabled = !currentModuleInfo.title;
@@ -103,7 +113,10 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
             margin="normal"
             value={currentModuleInfo.title}
             onChange={(event) =>
-              setCurrentModuleInfo({ ...currentModuleInfo, title: event.target.value })
+              setCurrentModuleInfo({
+                ...currentModuleInfo,
+                title: event.target.value,
+              })
             }
           />
           <TextField
@@ -113,7 +126,10 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
             margin="normal"
             value={currentModuleInfo.description}
             onChange={(event) =>
-              setCurrentModuleInfo({ ...currentModuleInfo, description: event.target.value })
+              setCurrentModuleInfo({
+                ...currentModuleInfo,
+                description: event.target.value,
+              })
             }
           />
           <TextField
@@ -124,7 +140,10 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
             value={currentModuleInfo.order}
             inputProps={{ min: 1 }}
             onChange={(event) =>
-              setCurrentModuleInfo({ ...currentModuleInfo, order: event.target.value })
+              setCurrentModuleInfo({
+                ...currentModuleInfo,
+                order: event.target.value,
+              })
             }
           />
           <Styled.TextButtonBlock>
@@ -140,7 +159,7 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
             />
           )}
           {lessons?.map((lesson) => (
-            <LessonCard lesson={lesson} key={lesson.temporaryLessonId} />
+            <LessonCard lesson={lesson} key={lesson.temporaryLessonId} onLessonDelete={onLessonDelete} />
           ))}
           <Styled.TestBlock>
             <Styled.Text variant="body1">{t("general.test")}</Styled.Text>

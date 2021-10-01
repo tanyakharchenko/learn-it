@@ -8,7 +8,8 @@ import {
   setLessonInfoAction,
   deleteLessonAction,
   deleteModuleAction,
-  setModuleInfoAction
+  setModuleInfoAction,
+  deleteLessonStepAction
 } from "./actions";
 
 const initialState: CourseState = {
@@ -28,7 +29,8 @@ export const newCourseSlice = createSlice({
     setLessonInfo: setLessonInfoAction,
     deleteLesson: deleteLessonAction,
     deleteModule: deleteModuleAction,
-    setModuleInfo: setModuleInfoAction
+    setModuleInfo: setModuleInfoAction,
+    deleteLessonStep: deleteLessonStepAction,
   },
 });
 
@@ -40,7 +42,8 @@ export const {
   setLessonInfo,
   deleteLesson,
   deleteModule,
-  setModuleInfo
+  setModuleInfo,
+  deleteLessonStep
 } = newCourseSlice.actions;
 
 export default newCourseSlice.reducer;

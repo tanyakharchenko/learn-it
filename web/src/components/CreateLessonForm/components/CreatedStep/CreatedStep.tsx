@@ -11,6 +11,7 @@ interface OwnProps {
   step: NewLessonStep;
   onEditStart: () => void;
   onEditEnd: () => void;
+  deleteStep: (temporaryStepId: string) => void;
   saveEditedStep: ({
     title,
     description,
@@ -30,7 +31,8 @@ export const CreatedStep: React.FC<OwnProps> = ({
   step,
   onEditStart,
   onEditEnd,
-  saveEditedStep
+  saveEditedStep,
+  deleteStep
 }) => {
   const [isEditMode, setIsEditMode] = React.useState(false);
 
@@ -42,6 +44,11 @@ export const CreatedStep: React.FC<OwnProps> = ({
   const closeEditMode = () => {
     onEditEnd();
     setIsEditMode(false);
+  };
+
+  const onStepDelete = () => {
+    deleteStep(step.temporaryStepId);
+    closeEditMode();
   };
 
   return (
@@ -64,7 +71,7 @@ export const CreatedStep: React.FC<OwnProps> = ({
             <IconButton onClick={editStep}>
               <Pencil color="primary" fontSize="small" />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={onStepDelete}>
               <CloseIcon color="secondary" fontSize="small" />
             </IconButton>
           </Styled.CreatedStepButtons>

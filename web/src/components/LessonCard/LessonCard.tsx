@@ -9,9 +9,10 @@ import CloseIcon from "components/icons/Close";
 
 interface OwnProps {
   lesson: NewLesson;
+  onLessonDelete: (temporaryLessonId: string) => void;
 }
 
-export const LessonCard: React.FC<OwnProps> = ({ lesson }) => {
+export const LessonCard: React.FC<OwnProps> = ({ lesson, onLessonDelete }) => {
   const { t } = useTranslation();
   const [isControlsShown, setIsControlsShown] = React.useState(false);
 
@@ -26,6 +27,10 @@ export const LessonCard: React.FC<OwnProps> = ({ lesson }) => {
   const hideControls = () => {
     setIsControlsShown(false);
   };
+  
+  const deleteLesson = () => {
+    onLessonDelete(lesson.temporaryLessonId!)
+  }
 
   return (
     <Card.MaterialCard
@@ -38,7 +43,7 @@ export const LessonCard: React.FC<OwnProps> = ({ lesson }) => {
           <IconButton>
             <PencilIcon color="primary" />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={deleteLesson}>
             <CloseIcon color="secondary" />
           </IconButton>
         </Card.CardActions>

@@ -33,6 +33,12 @@ export interface DeleteModulePayload {
   temporaryModuleId: string;
 }
 
+export interface DeleteLessonStepPayload {
+  temporaryModuleId: string;
+  temporaryLessonId: string;
+  temporaryStepId: string;
+}
+
 export interface SetModuleInfo {
   title: string;
   description: string;

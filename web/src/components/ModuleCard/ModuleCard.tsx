@@ -9,9 +9,10 @@ import CloseIcon from "components/icons/Close";
 
 interface OwnProps {
   module: NewModule;
+  onModuleDelete: (temporaryModuleId: string) => void;
 }
 
-export const ModuleCard: React.FC<OwnProps> = ({ module }) => {
+export const ModuleCard: React.FC<OwnProps> = ({ module, onModuleDelete }) => {
   const { t } = useTranslation();
   const [isControlsShown, setIsControlsShown] = React.useState(false);
 
@@ -27,6 +28,10 @@ export const ModuleCard: React.FC<OwnProps> = ({ module }) => {
     setIsControlsShown(false);
   };
 
+  const deleteModule = () => {
+    onModuleDelete(module.temporaryModuleId!);
+  }
+
   return (
     <Card.MaterialCard
       sx={{ marginTop: "1rem", position: "relative", padding: "1rem" }}
@@ -38,7 +43,7 @@ export const ModuleCard: React.FC<OwnProps> = ({ module }) => {
           <IconButton>
             <PencilIcon color="primary" />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={deleteModule}>
             <CloseIcon color="secondary" />
           </IconButton>
         </Card.CardActions>
@@ -60,7 +65,7 @@ export const ModuleCard: React.FC<OwnProps> = ({ module }) => {
       </Typography>
       {module.lessons && <Typography>{t("general.lessons")}: </Typography>}
       {module.lessons?.map((lesson) => (
-        <Typography sx={{ fontSize: 14 }} color="text.secondary">
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" key={lesson.title}>
           {lesson.title}
         </Typography>
       ))}

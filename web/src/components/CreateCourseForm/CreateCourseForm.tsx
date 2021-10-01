@@ -2,8 +2,9 @@ import React from "react";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "store/hooks";
+import { useAppSelector, useAppDispatch } from "store/hooks";
 import { newCourseModules } from "store/newCourse/selectors";
+import { deleteModule } from "store/newCourse/slice";
 import { Currency } from "types/course";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
@@ -34,6 +35,8 @@ const courseCurrency = [
 export const CreateCourseForm = () => {
   const { t } = useTranslation();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+
   const [temporaryCourseId, setTemporaryCourseId] = React.useState("");
   const [isCreateModuleOpen, setIsCreateModuleOpen] = React.useState(false);
 
@@ -49,6 +52,10 @@ export const CreateCourseForm = () => {
 
   const closeModuleForm = () => {
     setIsCreateModuleOpen(false);
+  };
+
+  const onModuleDelete = (temporaryModuleId: string) => {
+    dispatch(deleteModule({ temporaryModuleId }));
   };
 
   return (
@@ -80,7 +87,7 @@ export const CreateCourseForm = () => {
           />
         )}
         {modules.map((module) => (
-          <ModuleCard module={module} key={module.temporaryModuleId} />
+          <ModuleCard module={module} key={module.temporaryModuleId} onModuleDelete={onModuleDelete} />
         ))}
         <Styled.PriceBlock>
           <TextField

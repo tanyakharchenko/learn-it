@@ -6,3 +6,4 @@ export * from './setLessonInfo';
 export * from './deleteLesson';
 export * from './deleteModule';
 export * from './setModuleInfo';
+export * from './deleteLessonStep';

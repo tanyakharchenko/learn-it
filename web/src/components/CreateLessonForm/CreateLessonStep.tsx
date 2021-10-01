@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StepType } from "types/course";
-import { setLessonStep, editLessonStep } from "store/newCourse/slice";
+import { setLessonStep, editLessonStep, deleteLessonStep } from "store/newCourse/slice";
 import { newCourseCurrentLessonSteps } from "store/newCourse/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { NewStep } from "./components/NewStep";
@@ -89,6 +89,14 @@ export const CreateLessonStep: React.FC<OwnProps> = ({
     );
   };
 
+  const deleteStep = (temporaryStepId: string) => {
+    dispatch(deleteLessonStep({
+      temporaryModuleId,
+      temporaryLessonId,
+      temporaryStepId,
+    }))
+  }
+
   const mapTranslationToStep = {
     [StepType.Video]: t("general.video"),
     [StepType.Notes]: t("general.notes"),
@@ -117,6 +125,7 @@ export const CreateLessonStep: React.FC<OwnProps> = ({
                 onEditStart={onEditStart}
                 onEditEnd={onEditEnd}
                 saveEditedStep={saveEditedStep}
+                deleteStep={deleteStep}
               />
             ))}
           </React.Fragment>
