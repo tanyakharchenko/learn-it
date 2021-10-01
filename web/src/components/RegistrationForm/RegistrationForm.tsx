@@ -21,28 +21,33 @@ export const RegistrationForm: React.FC<OwnProps> = ({ isOpen, onClose }) => {
         <Styled.CloseButton onClick={onClose}>
           <CloseIcon />
         </Styled.CloseButton>
-        <Typography textAlign="center" variant="h5">
-          {t("authentication.loginHi")}
+        <Typography textAlign="center" variant="h5" sx={{marginBottom: '1rem'}}>
+          {t("authentication.registrationHi")}
         </Typography>
         <TextField
           type="email"
-          variant="standard"
           label={t("authentication.email")}
           fullWidth
-          margin="normal"
+          margin="dense"
+        />
+        <TextField
+          label={t("authentication.nickName")}
+          fullWidth
+          margin="dense"
         />
         <TextField
           type="password"
-          variant="standard"
           label={t("authentication.password")}
           fullWidth
-          margin="normal"
+          margin="dense"
         />
-        <Button variant="text" sx={{ textTransform: "none" }}>
-          {t("authentication.forgetPassword")}
-        </Button>
-        <Button variant="contained" fullWidth sx={{ marginTop: "1rem" }}>
-          {t("authentication.login")}
+        <TextField
+          label={t("authentication.linkToInstagram")}
+          fullWidth
+          margin="dense"
+        />
+        <Button variant="contained" fullWidth sx={{ marginTop: "2rem" }}>
+          {t("authentication.registration")}
         </Button>
       </Styled.Form>
     </Modal>

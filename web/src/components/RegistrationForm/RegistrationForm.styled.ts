@@ -3,9 +3,9 @@ import IconButton from "components/ui/IconButton";
 
 export const Form = styled.form`
     background: white;
-    width: 20rem;
-    height: 18rem;
-    padding: 2rem;
+    width: 30rem;
+    height: 25rem;
+    padding: 3rem;
     margin: 5rem auto;
     border-radius: 1rem;
     outline: none;
@@ -14,6 +14,6 @@ export const Form = styled.form`
 
 export const CloseButton = styled(IconButton)`
     position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
+    right: 2rem;
+    top: 1rem;
 `;

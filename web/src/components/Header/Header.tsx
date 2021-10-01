@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useAuth0 } from "@auth0/auth0-react";
 import Button from "components/ui/Button";
 import { LoginForm } from "components/LoginForm";
 import { RegistrationForm } from "components/RegistrationForm";
@@ -8,7 +7,6 @@ import * as Styled from "./Header.styled";
 
 export const Header = () => {
   const { t } = useTranslation();
-  const { loginWithRedirect } = useAuth0();
   
   const [isLoginFormOpen, setIsLoginFormOpen] = React.useState(false);
   const [isRegistrationFormOpen, setIsRegistrationFormOpen] = React.useState(false);

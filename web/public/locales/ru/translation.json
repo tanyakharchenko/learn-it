@@ -42,6 +42,9 @@
     "email": "Email",
     "password": "Пароль",
     "loginHi": "С возвращением!",
-    "forgetPassword": "Забыли пароль?"
+    "registrationHi": "Создание аккаунта",
+    "forgetPassword": "Забыли пароль?",
+    "nickName": "Ник (будет доступен всем пользователям)",
+    "linkToInstagram": "Ссылка на Instagram аккаунт"
   }
 }
