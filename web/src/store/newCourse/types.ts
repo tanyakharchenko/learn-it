@@ -1,4 +1,5 @@
-import { Currency, NewCourse, NewLessonStep } from "../../types/course";
+import { NewCourse, NewLessonStep } from "../../types/NewCourse";
+import { Currency } from "../../types/general";
 
 export interface CourseState extends NewCourse {}
 

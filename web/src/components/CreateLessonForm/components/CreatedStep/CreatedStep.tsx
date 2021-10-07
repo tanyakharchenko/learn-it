@@ -1,5 +1,6 @@
 import React from "react";
-import { NewLessonStep, StepType } from "types/course";
+import { NewLessonStep } from "types/NewCourse";
+import { StepType } from "types/general";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
 import CloseIcon from "components/icons/Close";

@@ -7,6 +7,12 @@ enum Categories {
     Dogs,
     Education
 }
+
+enum Currency {
+    Uah = 'UAH',
+    Usd = 'USD',
+    Rub = 'RUB'
+  }
 export interface Course {
     id: string;
     title: string;
@@ -16,9 +22,10 @@ export interface Course {
     modules: Module[];
     authorId: string;
     price: {
-        value: string;
-        currensy: string;
-    };
+        withDiscount: string;
+        withoutDiscount: string;
+        currency: Currency;
+      }
     category: Categories;
     duration: number;
 };

@@ -1,5 +1,5 @@
 import CreateIcon from '@mui/icons-material/Create';
 
-const Pencil = CreateIcon;
+const PencilIcon = CreateIcon;
 
-export default Pencil;
+export default PencilIcon;

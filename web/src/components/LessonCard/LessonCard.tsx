@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { NewLesson } from "types/course";
+import { NewLesson } from "types/NewCourse";
 import Card from "components/ui/Card";
 import Typography from "components/ui/Typography";
 import IconButton from "components/ui/IconButton";
@@ -33,20 +33,20 @@ export const LessonCard: React.FC<OwnProps> = ({ lesson, onLessonDelete }) => {
   }
 
   return (
-    <Card.MaterialCard
+    <Card.Wrapper
       sx={{ marginTop: "1rem", position: "relative", padding: "1rem" }}
       onMouseEnter={showControls}
       onMouseLeave={hideControls}
     >
       {isControlsShown && (
-        <Card.CardActions sx={{ position: "absolute", right: "0", top: "0" }}>
+        <Card.Actions sx={{ position: "absolute", right: "0", top: "0" }}>
           <IconButton>
             <PencilIcon color="primary" />
           </IconButton>
           <IconButton onClick={deleteLesson}>
             <CloseIcon color="secondary" />
           </IconButton>
-        </Card.CardActions>
+        </Card.Actions>
       )}
       <Typography
         sx={{ fontSize: 14, maxWidth: "80%" }}
@@ -72,6 +72,6 @@ export const LessonCard: React.FC<OwnProps> = ({ lesson, onLessonDelete }) => {
         {t("lessonForm.stepsInTheLesson")}{" "}
         {lesson.steps ? lesson.steps.length : 0}
       </Typography>
-    </Card.MaterialCard>
+    </Card.Wrapper>
   );
 };

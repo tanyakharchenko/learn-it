@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StepType } from "types/course";
+import { StepType } from "types/general";
 import { setLessonStep, editLessonStep, deleteLessonStep } from "store/newCourse/slice";
 import { newCourseCurrentLessonSteps } from "store/newCourse/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";

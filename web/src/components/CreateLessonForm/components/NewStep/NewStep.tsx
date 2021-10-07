@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
-import { StepType } from "types/course";
+import { StepType } from "types/general";
 import DoneIcon from "components/icons/Done";
 import { StepFields } from "../StepFields";
 import * as Styled from "./NewStep.styled";

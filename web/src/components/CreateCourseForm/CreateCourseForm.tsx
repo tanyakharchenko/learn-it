@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import { newCourseModules } from "store/newCourse/selectors";
 import { deleteModule, saveCourseInfo } from "store/newCourse/slice";
-import { Currency } from "types/course";
+import { Currency } from "types/general";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
 import Container from "components/ui/Container";
@@ -66,7 +66,6 @@ export const CreateCourseForm = () => {
   };
 
   const saveCourse = () => {
-    console.log('qweqwe')
     dispatch(
       saveCourseInfo({
         temporaryCourseId,

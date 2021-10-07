@@ -34,7 +34,8 @@
     "lessons": "Занятия",
     "price": "Цена",
     "priceWithDiscount": "Цена со скидкой",
-    "currency": "Валюта"
+    "currency": "Валюта",
+    "module": "Модуль"
   },
   "authentication": {
     "login": "Войти",
@@ -46,5 +47,20 @@
     "forgetPassword": "Забыли пароль?",
     "nickName": "Ник (будет доступен всем пользователям)",
     "linkToInstagram": "Ссылка на Instagram аккаунт"
+  },
+  "publicProfile": {
+    "myCourses": "Мои курсы:"
+  },
+  "courseCard": {
+    "courseProgram": "Программа курса",
+    "availableAlways": "Доступен все время",
+    "availableAlwaysAction": "Приступить",
+    "startDate": "Старт",
+    "startDateAction": "Записаться",
+    "availableSoon": "Доступен в скором времени",
+    "availableSoonAction": "Предзапись",
+    "inProgress": "Курс сейчас идет",
+    "inProgressAction": "Сообщите, когда новый поток",
+    "unknown": "Информация будет позже"
   }
 }

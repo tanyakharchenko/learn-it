@@ -2,7 +2,8 @@ import React from "react";
 import IconButton from "components/ui/IconButton";
 import CloseIcon from "components/icons/Close";
 import DoneIcon from "components/icons/Done";
-import { StepType, NewLessonStep } from "types/course";
+import { NewLessonStep } from "types/NewCourse";
+import { StepType } from "types/general";
 import { StepFields } from "../StepFields";
 import * as Styled from "./EditStep.styled";
 

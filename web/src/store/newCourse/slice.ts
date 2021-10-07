@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Currency } from "types/course";
+import { Currency } from "types/general";
 import { CourseState } from "./types";
 import {
   setLessonStepAction,
