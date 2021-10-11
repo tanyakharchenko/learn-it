@@ -1,10 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import Typography from "components/ui/Typography";
-import Button from "components/ui/Button";
 
-export const Form = styled.form`
-    width: 45%;
-    max-width: 40rem; 
+export const PriceBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: ${(props) => props.theme.colors.lightContrast};
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    max-width: 50%;
 `;
 
 export const Text = styled(Typography)`
@@ -19,11 +23,5 @@ export const TextButtonBlock = styled.div`
 
 export const ActionButtons = styled.div`
   display: flex;
-  justify-content: left;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-`;
-
-export const ActionButton = styled(Button)`
-  margin-right: 1rem;
+  margin-left: auto;
 `;

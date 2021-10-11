@@ -1,5 +1,6 @@
-import { NewCourse, NewLessonStep } from "../../types/NewCourse";
-import { Currency } from "../../types/general";
+import { NewCourse, NewLessonStep } from "types/NewCourse";
+import { Currency } from "types/general";
+import { Tariff } from "types/Course";
 
 export interface CourseState extends NewCourse {}
 
@@ -29,9 +30,8 @@ export interface SaveCourseInfo {
   temporaryCourseId: string;
   title: string;
   description: string;
-  price: string;
-  priceWithDiscount: string;
-  currency: Currency
+  currency: Currency;
+  tariffs: Tariff[];
 }
 
 export interface DeleteLessonPayload {

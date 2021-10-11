@@ -35,7 +35,8 @@
     "price": "Цена",
     "priceWithDiscount": "Цена со скидкой",
     "currency": "Валюта",
-    "module": "Модуль"
+    "module": "Модуль",
+    "tariffs": "Тарифы"
   },
   "authentication": {
     "login": "Войти",

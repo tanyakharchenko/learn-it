@@ -10,10 +10,7 @@ export const saveCourseInfoAction: CaseReducer<
     title: action.payload.title,
     description: action.payload.description,
     temporaryCourseId: action.payload.temporaryCourseId,
-    price: {
-        withDiscount: action.payload.priceWithDiscount,
-        withoutDiscount: action.payload.price,
-        currency: action.payload.currency
-    }
+    currency: action.payload.currency,
+    tariffs: action.payload.tariffs,
   };
 };

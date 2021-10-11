@@ -19,7 +19,7 @@ const Select: React.FC<OwnProps> = ({ onChange, label, options }) => {
   };
 
   return (
-    <FormControl variant="standard" size="small" sx={{marginBottom: '8px'}}>
+    <FormControl variant="standard" size="small" sx={{marginTop: '1rem'}}>
       <InputLabel id="select-label">{label}</InputLabel>
       <SelectMaterial
         labelId="select-label"

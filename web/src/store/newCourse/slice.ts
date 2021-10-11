@@ -19,11 +19,8 @@ const initialState: CourseState = {
   description: "",
   modules: [],
   temporaryCourseId: "",
-  price: {
-    withoutDiscount: "",
-    withDiscount: "",
-    currency: Currency.Uah
-  }
+  currency: Currency.Uah,
+  tariffs: []
 };
 
 export const newCourseSlice = createSlice({

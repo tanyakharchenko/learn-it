@@ -28,7 +28,7 @@ export interface NewModule {
 export interface NewCourse {
   title: string;
   description: string;
-  tariffs: Tariff;
+  tariffs: Tariff[];
   currency: Currency;
   modules: NewModule[];
   temporaryCourseId: string;

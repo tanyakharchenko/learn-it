@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "store/hooks";
 import { newCourseModules } from "store/newCourse/selectors";
 import { deleteModule, saveCourseInfo } from "store/newCourse/slice";
 import { Currency } from "types/general";
+import { Tariff } from "types/Course";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
 import Container from "components/ui/Container";
@@ -15,6 +16,8 @@ import CloseIcon from "components/icons/Close";
 import DoneIcon from "components/icons/Done";
 import { ModuleCard } from "components/ModuleCard";
 import { CreateModuleForm } from "components/CreateModuleForm";
+import { ChooseTariff } from './components/ChooseTariff';
+import { CreatedTariff } from './components/CreatedTariff';
 import * as Styled from "./CreateCourseForm.styled";
 
 const courseCurrency = [
@@ -42,9 +45,8 @@ export const CreateCourseForm = () => {
   const [courseInfo, setCourseInfo] = React.useState({
     title: "",
     description: "",
-    price: "",
-    priceWithDiscount: "",
     currency: Currency.Uah as Currency,
+    tariffs: [] as Tariff[]
   });
 
   const modules = useAppSelector(newCourseModules);
@@ -72,6 +74,10 @@ export const CreateCourseForm = () => {
         ...courseInfo,
       })
     );
+  };
+
+  const saveTariff = (tariff: Tariff) => {
+    setCourseInfo({...courseInfo, tariffs: [...courseInfo.tariffs, tariff]})
   };
 
   return (
@@ -117,38 +123,15 @@ export const CreateCourseForm = () => {
             onModuleDelete={onModuleDelete}
           />
         ))}
-        <Styled.PriceBlock>
-          <TextField
-            variant="standard"
-            label={t("general.price")}
-            multiline
-            margin="normal"
-            onChange={(event) =>
-              setCourseInfo({ ...courseInfo, price: event.target.value })
-            }
-            value={courseInfo.price}
-          />
-          <TextField
-            variant="standard"
-            label={t("general.priceWithDiscount")}
-            multiline
-            margin="normal"
-            onChange={(event) =>
-              setCourseInfo({
-                ...courseInfo,
-                priceWithDiscount: event.target.value,
-              })
-            }
-            value={courseInfo.priceWithDiscount}
-          />
-          <Select
-            label={t("general.currency")}
-            onChange={(value: Currency) =>
-              setCourseInfo({ ...courseInfo, currency: value })
-            }
-            options={courseCurrency}
-          />
-        </Styled.PriceBlock>
+        <Select
+          label={t("general.currency")}
+          onChange={(value: Currency) =>
+            setCourseInfo({ ...courseInfo, currency: value })
+          }
+          options={courseCurrency}
+        />
+        <ChooseTariff saveTariff={saveTariff} />
+        {courseInfo.tariffs.map((tariff) => <CreatedTariff tariff={tariff} key={tariff.title} />)}
         <Styled.ActionButtons>
           <Styled.ActionButton
             onClick={saveCourse}
