@@ -4,6 +4,7 @@ import Card from "components/ui/Card";
 import Typography from "components/ui/Typography";
 import Button from "components/ui/Button";
 import { Course, CourseStatus } from "types/Course";
+import { getSmallestPrice } from "utils/getSmallestPrice";
 import * as Styled from "./CourseCard.styled";
 
 interface OwnProps {
@@ -55,6 +56,9 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
             </Typography>
           ))}
         </Styled.CourseProgram>
+        <Typography sx={{ marginTop: "1rem" }} variant="h6">
+          {t("general.priceFrom")} {getSmallestPrice(course.tariffs)} {course.currency}
+        </Typography>
       </Card.Content>
       <Card.Actions sx={{ padding: "16px" }}>
         <Typography variant="body1" fontWeight="bold">
