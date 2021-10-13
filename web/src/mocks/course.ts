@@ -1,7 +1,7 @@
-import {CourseStatus} from '../types/Course';
-import { Currency, StepType } from '../types/general';
+import { CourseStatus, Course } from "../types/Course";
+import { Currency, StepType } from "../types/general";
 
-export const course1Mock = {
+export const course1Mock: Course = {
   id: "000000001",
   title: "HTML and CSS Basics",
   description:
@@ -73,7 +73,7 @@ export const course1Mock = {
       ],
     },
     {
-      id: "0000000003",
+      id: "0000000033",
       title: "Основы HTML",
       description:
         "В данном модуле вы познакомитесь с языком для написания разметки веб-страниц",
@@ -263,12 +263,25 @@ export const course1Mock = {
   tariffs: [
     {
       title: "Базовый",
-      description: "",
+      description: "В тариф входит 21 урок и 5 прямых эфиров, доступна обратная связь под видео и на эфире. Доступ к видео 4 месяца",
       fullPrice: "2540",
-      priceWithDiscount: "1990"
-    }
+      priceWithDiscount: "1990",
+    },
+    {
+      title: "Продвинутый",
+      description: "В тариф входит 21 урок и 5 прямых эфиров, доступна обратная связь под видео и на эфире. Доступ к видео 4 месяца. Доступ к видео 4 месяца. Доступ к видео 4 месяца. Доступ к видео 4 месяца. Доступ к видео 4 месяца",
+      fullPrice: "2540",
+      priceWithDiscount: "1001",
+    },
+    {
+      title: "Супер-Продвинутый",
+      description: "В тариф входит 21 урок и 5 прямых эфиров, доступна обратная связь под видео и на эфире. Доступ к видео 4 месяца. Доступ к видео 4 месяца. Доступ к видео 4 месяца. Доступ к видео 4 месяца. Доступ к видео 4 месяца",
+      fullPrice: "2540",
+      priceWithDiscount: "1001",
+    },
   ],
   currency: Currency.Uah,
-  status: CourseStatus.InProgress,
-  startDate: "29 Апреля" 
+  status: CourseStatus.AvailableAlways,
+  startDate: "29 Апреля",
+  authorId: "000001",
 };

@@ -13,6 +13,7 @@ export enum CourseStatus {
     AvailableAlways,
     RegistrationOpen,
     InProgress,
+    NotAvailable
 }
 
 export interface Step {
@@ -49,4 +50,5 @@ export interface Course {
     startDate: string;
     tariffs: Tariff[];
     currency: Currency;
+    authorId: string;
 }

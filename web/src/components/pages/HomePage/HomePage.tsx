@@ -1,4 +1,4 @@
 import React from "react";
-import Container from "components/ui/Container";
+import {PageContainer} from "components/ui/Container";
 
-export const HomePage = () => <Container>home</Container>;
+export const HomePage = () => <PageContainer>home</PageContainer>;

@@ -1,9 +1,9 @@
 import React from "react";
-import Container from "components/ui/Container";
+import { PageContainer } from "components/ui/Container";
 import { PublicProfile } from "components/PublicProfile";
 
 export const PublicProfilePage = () => (
-  <Container>
+  <PageContainer>
     <PublicProfile></PublicProfile>
-  </Container>
+  </PageContainer>
 );

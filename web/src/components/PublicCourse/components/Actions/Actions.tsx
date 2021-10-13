@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { CourseStatus } from "types/Course";
 import { useCourseStatusTranslation } from "components/hooks/useCourseStatusTranslation";
 import Typography from "components/ui/Typography";
@@ -12,19 +11,19 @@ interface OwnProps {
 }
 
 export const Actions: React.FC<OwnProps> = ({ status, startDate }) => {
-  const { t } = useTranslation();
-
   const { actionButtonText, text } = useCourseStatusTranslation(
     startDate,
     status
   );
+
+  const isActionAvailable = status !== CourseStatus.Unknown && status !== CourseStatus.NotAvailable;
 
   return (
     <Styled.Wrapper>
       <Styled.Colorfull>
         <Typography variant="h4">{text}</Typography>
       </Styled.Colorfull>
-      {status !== CourseStatus.Unknown && (
+      {isActionAvailable && (
         <Styled.ColorLess>
           <Button color="secondary" variant="contained" sx={{ marginLeft: "auto", minWidth: "15rem" }} size="large">
             {actionButtonText}

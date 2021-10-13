@@ -11,7 +11,6 @@ import {
 } from "store/newCourse/slice";
 import { newCourseCurrentModuleLessons } from "store/newCourse/selectors";
 import TextField from "components/ui/TextField";
-import Container from "components/ui/Container";
 import IconButton from "components/ui/IconButton";
 import UploadedFile from "components/ui/UploadedFile";
 import PlusIcon from "components/icons/Plus";
@@ -104,7 +103,6 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
 
   return (
     <Styled.FormWrapper>
-      <Container>
         <Styled.Form>
           <TextField
             variant="standard"
@@ -203,7 +201,6 @@ export const CreateModuleForm: React.FC<OwnProps> = ({ closeModuleForm }) => {
             </Styled.ActionButton>
           </Styled.ActionButtons>
         </Styled.Form>
-      </Container>
     </Styled.FormWrapper>
   );
 };

@@ -37,7 +37,9 @@
     "priceWithDiscount": "Цена со скидкой",
     "currency": "Валюта",
     "module": "Модуль",
-    "tariffs": "Тарифы"
+    "tariffs": "Тарифы",
+    "moreDetails": "Узнать подробнее",
+    "courseProgram": "Программа курса"
   },
   "authentication": {
     "login": "Войти",
@@ -54,7 +56,6 @@
     "myCourses": "Мои курсы:"
   },
   "courseCard": {
-    "courseProgram": "Программа курса",
     "availableAlways": "Доступен все время",
     "availableAlwaysAction": "Приступить",
     "startDate": "Старт",
@@ -63,6 +64,10 @@
     "availableSoonAction": "Предзапись",
     "inProgress": "Курс сейчас идет",
     "inProgressAction": "Сообщите, когда новый поток",
-    "unknown": "Информация будет позже"
+    "unknown": "Информация о старте будет позже",
+    "notAvailable": "Недоступен"
+  },
+  "author": {
+    "courseAuthor": "Автор курса"
   }
 }

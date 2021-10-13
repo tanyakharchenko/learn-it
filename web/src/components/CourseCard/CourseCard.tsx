@@ -2,8 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Card from "components/ui/Card";
 import Typography from "components/ui/Typography";
+import Link from "components/ui/Link";
 import Button from "components/ui/Button";
 import { Course, CourseStatus } from "types/Course";
+import { useCourseStatusTranslation } from "components/hooks/useCourseStatusTranslation";
 import { getSmallestPrice } from "utils/getSmallestPrice";
 import * as Styled from "./CourseCard.styled";
 
@@ -14,30 +16,12 @@ interface OwnProps {
 export const CourseCard: React.FC<OwnProps> = ({ course }) => {
   const { t } = useTranslation();
 
-  const mapStatusToTranslation = {
-    [CourseStatus.AvailableAlways]: {
-      text: t("courseCard.availableAlways"),
-      actionButtonText: t("courseCard.availableAlwaysAction"),
-    },
-    [CourseStatus.AvailableSoon]: {
-      text: t("courseCard.availableSoon"),
-      actionButtonText: t("courseCard.availableSoonAction"),
-    },
-    [CourseStatus.RegistrationOpen]: {
-      text: `${t("courseCard.startDate")} ${course.startDate}`,
-      actionButtonText: t("courseCard.startDateAction"),
-    },
-    [CourseStatus.InProgress]: {
-      text: t("courseCard.inProgress"),
-      actionButtonText: t("courseCard.inProgressAction"),
-    },
-    [CourseStatus.Unknown]: {
-      text: t("courseCard.unknown"),
-      actionButtonText: t("courseCard.inProgressAction"),
-    },
-  };
+  const { actionButtonText, text } = useCourseStatusTranslation(
+    course.startDate,
+    course.status
+  );
 
-  const currentStatus = mapStatusToTranslation[course.status];
+  const isActionAvailable = course.status !== CourseStatus.Unknown && course.status !== CourseStatus.NotAvailable;
 
   return (
     <Styled.CardWrapper>
@@ -47,7 +31,7 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
         </Styled.Title>
         <Typography variant="body2">{course.description}</Typography>
         <Typography variant="body1" sx={{ marginTop: "1rem" }}>
-          {t("courseCard.courseProgram")}
+          {t("general.courseProgram")}
         </Typography>
         <Styled.CourseProgram>
           {course.modules.map((module) => (
@@ -57,16 +41,24 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
           ))}
         </Styled.CourseProgram>
         <Typography sx={{ marginTop: "1rem" }} variant="h6">
-          {t("general.priceFrom")} {getSmallestPrice(course.tariffs)} {course.currency}
+          {t("general.priceFrom")} {getSmallestPrice(course.tariffs)}{" "}
+          {course.currency}
+          <Link
+            fontSize="16px"
+            marginLeft="0.5rem"
+            href={`/course/${course.id}`}
+          >
+            {t("general.moreDetails")}
+          </Link>
         </Typography>
       </Card.Content>
       <Card.Actions sx={{ padding: "16px" }}>
         <Typography variant="body1" fontWeight="bold">
-          {currentStatus.text}
+          {text}
         </Typography>
-        {course.status !== CourseStatus.Unknown && (
+        {isActionAvailable && (
           <Button variant="contained" sx={{ marginLeft: "auto" }}>
-            {currentStatus.actionButtonText}
+            {actionButtonText}
           </Button>
         )}
       </Card.Actions>

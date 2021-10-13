@@ -9,7 +9,6 @@ import { Currency } from "types/general";
 import { Tariff } from "types/Course";
 import TextField from "components/ui/TextField";
 import IconButton from "components/ui/IconButton";
-import Container from "components/ui/Container";
 import Select from "components/ui/Select";
 import PlusIcon from "components/icons/Plus";
 import CloseIcon from "components/icons/Close";
@@ -82,7 +81,6 @@ export const CreateCourseForm = () => {
 
   return (
     <Styled.Form>
-      <Container>
         <TextField
           variant="standard"
           label={t("courseForm.title")}
@@ -153,7 +151,6 @@ export const CreateCourseForm = () => {
         <Styled.Text variant="body2">
           {t("courseForm.laterChangeAvailable")}
         </Styled.Text>
-      </Container>
     </Styled.Form>
   );
 };

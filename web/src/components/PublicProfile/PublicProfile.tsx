@@ -22,6 +22,7 @@ export const PublicProfile = () => {
     description,
     instagramLink,
     avatarUrl,
+    createdCourses
   } = publicMockUser;
 
   return (
@@ -37,9 +38,7 @@ export const PublicProfile = () => {
         {t("publicProfile.myCourses")}
       </Typography>
       <Styled.CoursesWrapper>
-        <CourseCard course={course1Mock} />
-        <CourseCard course={course1Mock} />
-        <CourseCard course={course1Mock} />
+        {createdCourses.map((course) => <CourseCard key={course.id} course={course} />)}
       </Styled.CoursesWrapper>
     </Styled.Wrapper>
   );

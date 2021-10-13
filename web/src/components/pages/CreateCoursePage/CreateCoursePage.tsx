@@ -1,5 +1,5 @@
 import React from "react";
 import { CreateCourseForm } from "components/CreateCourseForm";
-import Container from "components/ui/Container";
+import {PageContainer} from "components/ui/Container";
 
-export const CreateCoursePage = () => <Container><CreateCourseForm /></Container>;
+export const CreateCoursePage = () => <PageContainer><CreateCourseForm /></PageContainer>;

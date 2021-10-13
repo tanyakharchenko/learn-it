@@ -18,7 +18,7 @@ export const Tariff = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem 0.2rem;
+  padding: 2rem 1rem 1rem;
   box-shadow: ${(props) => `0 0 10px ${props.theme.colors.lightGrey}`};
   margin: 1rem 1rem 0 1rem;
   border-radius: 4px;
