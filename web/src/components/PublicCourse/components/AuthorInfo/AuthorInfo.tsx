@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { AuthorByCourse } from "types/Author";
 import Avatar from "components/ui/Avatar";
 import Typography from "components/ui/Typography";
-import Link from "components/ui/Link";
 import * as Styled from "./AuthorInfo.styled";
 
 interface OwnProps {
@@ -18,7 +18,7 @@ export const AuthorInfo: React.FC<OwnProps> = ({ author }) => {
       <Styled.TextBlock>
         <Typography>
           {t("author.courseAuthor")}&nbsp;
-          <Link href={`/user/${author.id}`}>{author.fullName}</Link>
+          <Link to={`/user/${author.id}`}>{author.fullName}</Link>
         </Typography>
         <Typography marginTop="1rem">
             {author.coursesSelfDescription}

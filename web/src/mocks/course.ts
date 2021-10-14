@@ -1,4 +1,4 @@
-import { CourseStatus, Course } from "../types/Course";
+import { CourseStatus, Course, PublishedStatus } from "../types/Course";
 import { Currency, StepType } from "../types/general";
 
 export const course1Mock: Course = {
@@ -284,4 +284,5 @@ export const course1Mock: Course = {
   status: CourseStatus.AvailableAlways,
   startDate: "29 Апреля",
   authorId: "000001",
+  publishedStatus: PublishedStatus.Published
 };

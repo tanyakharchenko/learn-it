@@ -9,5 +9,5 @@ export const Wrapper = styled(AppBar)`
     display: flex;
     align-items: center;
     background: white;
-    padding: 0.5rem 48px;
+    padding: 0.5rem 3rem;
 `;

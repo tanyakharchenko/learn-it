@@ -7,5 +7,5 @@ export interface PublicProfile {
     avatarUrl: string;
     description: string;
     instagramLink: string;
-    createdCourses: Course[];
+    createdCourses: Course[]; // only published
 }

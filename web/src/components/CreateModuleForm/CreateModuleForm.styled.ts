@@ -15,6 +15,7 @@ export const FormWrapper = styled.div`
 
 export const Form = styled.div`
     width: 65%;
+    padding: 2rem;
 `;
 
 export const Text = styled(Typography)`

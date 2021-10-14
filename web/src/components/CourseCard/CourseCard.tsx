@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import Card from "components/ui/Card";
 import Typography from "components/ui/Typography";
-import Link from "components/ui/Link";
 import Button from "components/ui/Button";
 import { Course, CourseStatus } from "types/Course";
 import { useCourseStatusTranslation } from "components/hooks/useCourseStatusTranslation";
@@ -21,7 +21,9 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
     course.status
   );
 
-  const isActionAvailable = course.status !== CourseStatus.Unknown && course.status !== CourseStatus.NotAvailable;
+  const isActionAvailable =
+    course.status !== CourseStatus.Unknown &&
+    course.status !== CourseStatus.NotAvailable;
 
   return (
     <Styled.CardWrapper>
@@ -44,9 +46,8 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
           {t("general.priceFrom")} {getSmallestPrice(course.tariffs)}{" "}
           {course.currency}
           <Link
-            fontSize="16px"
-            marginLeft="0.5rem"
-            href={`/course/${course.id}`}
+            to={`/course/${course.id}`}
+            style={{ fontSize: "16px", marginLeft: "0.5rem" }}
           >
             {t("general.moreDetails")}
           </Link>

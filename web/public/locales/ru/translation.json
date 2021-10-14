@@ -69,5 +69,13 @@
   },
   "author": {
     "courseAuthor": "Автор курса"
+  },
+  "privateProfile": {
+    "myLearning": "Моя учеба",
+    "myCourses": "Мои курсы",
+    "myStudents": "Мои ученики",
+    "purchaseHistory": "История оплат",
+    "editProfile": "Редактировать профиль",
+    "addCourse": "Добавить курс"
   }
 }

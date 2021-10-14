@@ -16,6 +16,12 @@ export enum CourseStatus {
     NotAvailable
 }
 
+export enum PublishedStatus {
+    Unpublished,
+    Published,
+    Moderating
+}
+
 export interface Step {
     id: string;
     title: string;
@@ -51,4 +57,5 @@ export interface Course {
     tariffs: Tariff[];
     currency: Currency;
     authorId: string;
+    publishedStatus: PublishedStatus;
 }
