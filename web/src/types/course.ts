@@ -17,9 +17,10 @@ export enum CourseStatus {
 }
 
 export enum PublishedStatus {
+    Draft,
+    Moderating,
     Unpublished,
     Published,
-    Moderating
 }
 
 export interface Step {

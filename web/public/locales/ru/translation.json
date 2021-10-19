@@ -39,7 +39,8 @@
     "module": "Модуль",
     "tariffs": "Тарифы",
     "moreDetails": "Узнать подробнее",
-    "courseProgram": "Программа курса"
+    "courseProgram": "Программа курса",
+    "edit": "Редактировать"
   },
   "authentication": {
     "login": "Войти",
@@ -76,6 +77,10 @@
     "myStudents": "Мои ученики",
     "purchaseHistory": "История оплат",
     "editProfile": "Редактировать профиль",
-    "addCourse": "Добавить курс"
+    "addCourse": "Добавить курс",
+    "fullName": "Полное имя",
+    "nickName": "Ник",
+    "description": "Описание профиля",
+    "instagramLink": "Ссылка на Instagram"
   }
 }
