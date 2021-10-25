@@ -2,8 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { publicMockUser } from "mocks/user";
-import { course1Mock } from "mocks/course";
-import { CourseCard } from "components/CourseCard";
+import { PublicCourseCard } from "components/CourseCards/PublicCourseCard";
 import Typography from "components/ui/Typography";
 import { TopInfo } from "./components/TopInfo";
 import * as Styled from "./PublicProfile.styled";
@@ -38,7 +37,7 @@ export const PublicProfile = () => {
         {t("publicProfile.myCourses")}
       </Typography>
       <Styled.CoursesWrapper>
-        {createdCourses.map((course) => <CourseCard key={course.id} course={course} />)}
+        {createdCourses.map((course) => <PublicCourseCard key={course.id} course={course} />)}
       </Styled.CoursesWrapper>
     </Styled.Wrapper>
   );

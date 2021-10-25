@@ -81,6 +81,15 @@
     "fullName": "Полное имя",
     "nickName": "Ник",
     "description": "Описание профиля",
-    "instagramLink": "Ссылка на Instagram"
+    "instagramLink": "Ссылка на Instagram",
+    "myProfile": "Мой профиль",
+    "inProgress": "В прогрессе",
+    "planned": "Скоро доступны",
+    "finished": "Завершенные",
+    "currentModule": "Текущий модуль:",
+    "currentLesson": "Текущее занятие:",
+    "currentStep": "На шаге:",
+    "toLearning": "К учебе!",
+    "toMaterials": "К материалам"
   }
 }

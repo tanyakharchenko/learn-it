@@ -25,6 +25,7 @@ export const PrivateProfile = () => {
     <>
       <AsideMenu
         role={user.role}
+        myProfileURL={match.url}
         learningProfileURL={learningProfileURL}
         coursesProfileURL={coursesProfileURL}
         studentsProfileURL={studentsProfileURL}
@@ -35,7 +36,7 @@ export const PrivateProfile = () => {
           <Profile user={user} />
         </Route>
         <Route path={learningProfileURL} exact>
-          <MyLearning />
+          <MyLearning inProgressCourses={user.inProgressCourses} plannedCourses={user.plannedCourses} finishedCourses={user.finishedCourses} />
         </Route>
       </Switch>
     </>

@@ -7,13 +7,14 @@ import Button from "components/ui/Button";
 import { Course, CourseStatus } from "types/Course";
 import { useCourseStatusTranslation } from "components/hooks/useCourseStatusTranslation";
 import { getSmallestPrice } from "utils/getSmallestPrice";
-import * as Styled from "./CourseCard.styled";
+import { CardWrapper, Title, CourseCardTypes } from "../CourseCards.styled";
+import * as Styled from "./PublicCourseCard.styled";
 
 interface OwnProps {
   course: Course;
 }
 
-export const CourseCard: React.FC<OwnProps> = ({ course }) => {
+export const PublicCourseCard: React.FC<OwnProps> = ({ course }) => {
   const { t } = useTranslation();
 
   const { actionButtonText, text } = useCourseStatusTranslation(
@@ -26,11 +27,11 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
     course.status !== CourseStatus.NotAvailable;
 
   return (
-    <Styled.CardWrapper>
+    <CardWrapper>
       <Card.Content>
-        <Styled.Title>
+        <Title type={CourseCardTypes.Default}>
           <Typography variant="h5">{course.title}</Typography>
-        </Styled.Title>
+        </Title>
         <Typography variant="body2">{course.description}</Typography>
         <Typography variant="body1" sx={{ marginTop: "1rem" }}>
           {t("general.courseProgram")}
@@ -63,6 +64,6 @@ export const CourseCard: React.FC<OwnProps> = ({ course }) => {
           </Button>
         )}
       </Card.Actions>
-    </Styled.CardWrapper>
+    </CardWrapper>
   );
 };

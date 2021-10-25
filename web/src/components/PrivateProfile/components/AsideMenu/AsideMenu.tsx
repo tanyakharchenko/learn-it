@@ -13,6 +13,7 @@ interface OwnProps {
   coursesProfileURL: string;
   studentsProfileURL: string;
   purchasesProfileURL: string;
+  myProfileURL: string;
 }
 
 const MenuItem = ({
@@ -44,10 +45,16 @@ export const AsideMenu: React.FC<OwnProps> = ({
   coursesProfileURL,
   studentsProfileURL,
   purchasesProfileURL,
+  myProfileURL,
 }) => {
   const { t } = useTranslation();
 
   const location = useLocation();
+
+  const isMyProfileTabActive = !!matchPath(location.pathname, {
+    path: myProfileURL,
+    exact: true
+  });
 
   const isLearningTabActive = !!matchPath(location.pathname, {
     path: learningProfileURL,
@@ -65,6 +72,11 @@ export const AsideMenu: React.FC<OwnProps> = ({
   return (
     <Styled.Wrapper>
       <List.Container>
+        <MenuItem
+          selected={isMyProfileTabActive}
+          text={t("privateProfile.myProfile")}
+          href={myProfileURL}
+        />
         <MenuItem
           selected={isLearningTabActive}
           text={t("privateProfile.myLearning")}

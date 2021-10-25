@@ -16,7 +16,7 @@ export const course1Mock: Course = {
       lessons: [
         {
           id: "00000000001",
-          title: "Введение в веб",
+          title: "Что такое веб?",
           description:
             "Данное занятие включает в себя видео и заметки к презентации, для лучшего усвоения материала нужно детально со всем ознакомиться :)",
           order: 1,
@@ -30,7 +30,7 @@ export const course1Mock: Course = {
             },
             {
               id: "000000000002",
-              title: "Введение в веб: заметки",
+              title: "Заметки: еще детальнее в тему",
               description: "",
               stepType: StepType.Notes,
               file: "notefilehere.pdf",
